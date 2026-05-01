@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: #0A0907;
+  color: #F2EBD7;
+  font-family: 'Manrope', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255, 77, 23, 0.10), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(200, 255, 60, 0.04), transparent 60%);
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+/* Subtle film grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* React Flow theme overrides */
+.react-flow {
+  background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* While Shift is held anywhere: stop text from being selected by drag, except
+   inside form fields where shift-arrow text selection is still useful. */
+body.shift-held,
+body.shift-held *:not(input):not(textarea):not(select) {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+body.shift-held ::selection {
+  background: transparent;
+}
+.react-flow__background path,
+.react-flow__background circle {
+  fill: rgba(242, 235, 215, 0.08);
+}
+.react-flow__edge-path {
+  stroke: #C8BFA1;
+  stroke-width: 1.5;
+  opacity: 0.85;
+}
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: #FF4D17;
+  opacity: 1;
+}
+/* Handle: 28px transparent hitbox shifted outward so its CENTER sits at the dot
+   position (~7px outside the circle's perimeter). React Flow uses the handle
+   box center as the edge anchor — so the drawn line emerges from the dot, not
+   from inside the circle. The visible dot is centered in the box (::before)
+   and scales from its own center on hover. */
+.react-flow__handle.handle-tt {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  opacity: 1;
+  z-index: 1000;
+  isolation: isolate;
+}
+/* Override RF's default transform to shift the box 7px farther out (75% of width vs 50%) */
+.react-flow__handle.handle-tt--target {
+  transform: translate(-75%, -50%);
+}
+.react-flow__handle.handle-tt--source {
+  transform: translate(75%, -50%);
+}
+.react-flow__handle.handle-tt::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #0A0907;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  transition: transform 160ms ease;
+  transform: translate(-50%, -50%);
+}
+.react-flow__handle.handle-tt--target::before {
+  background: #E5DCBE;
+}
+.react-flow__handle.handle-tt--source::before {
+  background: #FF4D17;
+}
+.react-flow__handle.handle-tt:hover::before {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+.react-flow__attribution {
+  background: transparent !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 9px !important;
+  color: rgba(242, 235, 215, 0.25) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.react-flow__attribution a {
+  color: rgba(242, 235, 215, 0.4) !important;
+}
+.react-flow__minimap {
+  background: rgba(15, 13, 10, 0.92) !important;
+  border: 1px solid rgba(242, 235, 215, 0.12);
+}
+.react-flow__controls {
+  background: transparent;
+  box-shadow: none;
+}
+.react-flow__controls-button {
+  background: rgba(15, 13, 10, 0.92);
+  border: 1px solid rgba(242, 235, 215, 0.12);
+  color: #F2EBD7;
+  border-bottom: 1px solid rgba(242, 235, 215, 0.12);
+}
+.react-flow__controls-button:hover {
+  background: #FF4D17;
+  color: #0A0907;
+}
+.react-flow__controls-button svg {
+  fill: currentColor;
+}
+
+/* Selection box */
+.react-flow__selection {
+  background: rgba(255, 77, 23, 0.06);
+  border: 1px dashed #FF4D17;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0F0D0A; }
+::-webkit-scrollbar-thumb { background: #2A241D; border: 2px solid #0F0D0A; }
+::-webkit-scrollbar-thumb:hover { background: #FF4D17; }
+
+/* Inputs */
+input[type="text"],
+input[type="number"],
+input[type="search"],
+input[type="url"],
+textarea,
+select {
+  background: #0F0D0A;
+  border: 1px solid rgba(242, 235, 215, 0.15);
+  color: #F2EBD7;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  padding: 8px 10px;
+  outline: none;
+  transition: border-color 140ms, background-color 140ms;
+  border-radius: 0;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #FF4D17;
+  background: #0A0907;
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(242, 235, 215, 0.3);
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1 3 L4 6 L7 3' stroke='%23C8BFA1' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 8px;
+  padding-right: 28px;
+}
+
+/* Utility classes */
+.tabular { font-variant-numeric: tabular-nums; }
+.glass { backdrop-filter: blur(8px) saturate(120%); -webkit-backdrop-filter: blur(8px) saturate(120%); }
+
+/* Custom range thumbs (used in horizontal contexts only) */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  height: 4px;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 1px;
+  background: rgba(242, 235, 215, 0.25);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #FF4D17;
+  margin-top: -6px;
+  border: 1px solid #0A0907;
+  cursor: pointer;
+}
