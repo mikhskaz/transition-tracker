@@ -28,6 +28,12 @@
 
 ---
 
+<p align="center">
+  <img src="pics/quartet.png" alt="Four songs chained as a directed transition graph" width="100%">
+</p>
+
+---
+
 **Source Code**: <a href="https://github.com/mikhskaz/transition-tracker">https://github.com/mikhskaz/transition-tracker</a>
 
 ---
@@ -91,6 +97,12 @@ VITE_SPOTIFY_REDIRECT_URI=http://127.0.0.1:5173/callback
 ```
 
 Restart the dev server. In the **+ Add Song** modal, the **Spotify Search** tab will now offer **Connect Spotify** — bounce to spotify.com, accept, and you're back with a token (auto-refreshed on 401).
+
+<p align="center">
+  <img src="pics/song-search.png" alt="Spotify search modal — type a query, pick a result, drop it on the canvas" width="560">
+</p>
+
+Type a query, pick a result, the song lands on the canvas with cover art, year, preview URL, and external Spotify link populated.
 
 ---
 
@@ -172,6 +184,16 @@ Hit **Save .JSON** in the top bar. Your set serializes to:
 ```
 
 **Load** validates the schema and prompts *Replace or Merge?* before applying.
+
+---
+
+## At scale
+
+The canvas holds up. Drop a couple of dozen tracks, draw the transitions that actually exist between them, and the BPM color ramp does the legwork — slow tracks fade into the dark, fast tracks punch white off the canvas.
+
+<p align="center">
+  <img src="pics/messymessy.png" alt="A dense graph of ~25 songs and their transitions" width="100%">
+</p>
 
 ---
 
